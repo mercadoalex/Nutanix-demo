@@ -1,3 +1,26 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "Telmate/proxmox"
+      version = "~> 2.9.0" # Use the latest stable version
+    }
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
+    nutanix = {
+      source  = "nutanix/nutanix"
+      version = "~> 1.5.0"
+    }
+  }
+
+  required_version = ">= 1.0.0"
+}
+
 resource "nutanix_cluster" "example" {
   name     = var.cluster_name
   username = var.username
@@ -27,20 +50,4 @@ module "azure_vm" {
   resource_group = var.azure_resource_group
   location      = var.azure_location
   vm_size       = var.azure_vm_size
-}
-
-output "proxmox_vm_id" {
-  value = module.proxmox_vm.vm_id
-}
-
-output "aws_instance_id" {
-  value = module.aws_ec2.instance_id
-}
-
-output "azure_vm_id" {
-  value = module.azure_vm.vm_id
-}
-
-output "nutanix_cluster_status" {
-  value = nutanix_cluster.example.status
 }

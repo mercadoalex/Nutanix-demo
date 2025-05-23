@@ -52,7 +52,3 @@ resource "azurerm_linux_virtual_machine" "example" {
     version   = "latest"
   }
 }
-
-output "public_ip" {
-  value = azurerm_network_interface.example.ip_configuration[0].private_ip_address
-}
