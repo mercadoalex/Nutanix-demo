@@ -67,3 +67,7 @@ After deployment, you can view the outputs defined in `outputs.tf`, which will p
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for more details.
+
+## Author
+
+Alejandro Mercado 
