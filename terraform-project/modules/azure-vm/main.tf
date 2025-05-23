@@ -42,7 +42,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 
   os_disk {
     caching              = "ReadWrite"
-    create_option        = "FromImage"
+    storage_account_type = "Standard_LRS" # Specify the storage account type
   }
 
   source_image_reference {

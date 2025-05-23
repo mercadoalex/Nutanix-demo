@@ -1,6 +1,6 @@
 resource "nutanix_vm" "example" {
   name              = var.vm_name
-  cluster_id        = var.cluster_id
+  cluster_id        = data.nutanix_cluster.example.id
   resources {
     num_vcpus = var.num_vcpus
     memory_mb = var.memory_mb

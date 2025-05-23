@@ -1,23 +1,32 @@
+terraform {
+  required_providers {
+    proxmox = {
+      source  = "Telmate/proxmox"
+      version = "~> 2.9.0"
+    }
+  }
+}
 resource "proxmox_vm_qemu" "vm" {
-  name        = var.vm_name
-  target_node = var.target_node
-  clone       = var.template_name
-
-  os_type     = var.os_type
-  cores       = var.cores
-  memory      = var.memory
+  name        = var.proxmox_vm_name
+  target_node = var.proxmox_target_node
+  clone       = var.proxmox_template_name
+  os_type     = var.proxmox_os_type
+  cores       = var.proxmox_cores
+  memory      = var.proxmox_memory
   disk {
-    size = var.disk_size
+    size = var.proxmox_disk_size
+    type    = var.proxmox_disk_type
+    storage = var.proxmox_storage
   }
 
-  network_interface {
-    model = var.network_model
+  network{
+    model  = var.proxmox_network_model
     bridge = var.network_bridge
   }
 
   provisioner "remote-exec" {
     inline = [
-      "echo 'Provisioning VM...'",
+      "echo 'Alex you are the bestt.......Provisioning VM...'",
       "your_provisioning_commands_here"
     ]
   }

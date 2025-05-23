@@ -3,7 +3,7 @@ variable "vm_name" {
   type        = string
 }
 
-variable "resource_group" {
+variable "resource_group_name" {
   description = "The name of the resource group where the Azure VM will be created."
   type        = string
 }
@@ -21,6 +21,7 @@ variable "vm_size" {
 variable "admin_username" {
   description = "The admin username for the Azure VM."
   type        = string
+  default     = "adminuser"
 }
 
 variable "admin_password" {
@@ -35,6 +36,6 @@ variable "network_interface_id" {
 }
 
 variable "image_reference" {
-  description = "The image reference for the Azure VM."
+  description = "The image reference for the Azure Virtual machine"
   type        = map(string)
 }

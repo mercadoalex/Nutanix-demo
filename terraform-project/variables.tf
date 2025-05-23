@@ -20,6 +20,23 @@ variable "proxmox_disk_size" {
   type        = number
   default     = 20
 }
+variable "proxmox_endpoint" {
+  description = "The Proxmox API endpoint (e.g., https://proxmox.example.com:8006/api2/json)"
+  type        = string
+}
+
+variable "proxmox_username" {
+  description = "The username for the Proxmox API"
+  type        = string
+}
+
+variable "proxmox_password" {
+  description = "The password for the Proxmox API"
+  type        = string
+  sensitive   = true
+}
+
+
 
 variable "aws_instance_type" {
   description = "The type of AWS EC2 instance"
@@ -41,6 +58,12 @@ variable "aws_region" {
   description = "The AWS region to deploy the EC2 instance"
   type        = string
   default     = "us-east-1"
+}
+
+variable "aws_security_group_ids" {
+  description = "The security group IDs to associate with the EC2 instance"
+  type        = list(string)
+  default     = ["sg-0123456789abcdef0"]
 }
 
 variable "azure_vm_name" {
