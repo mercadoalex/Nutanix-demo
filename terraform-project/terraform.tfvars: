@@ -1,4 +1,0 @@
-nutanix_cluster_name = "MyCluster"
-nutanix_endpoint = "https://my-nutanix-cluster:9440"
-nutanix_username = "admin"
-nutanix_password = "password"

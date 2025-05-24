@@ -20,9 +20,8 @@ terraform {
 }
   
 provider "nutanix" {
-    endpoint = var.nutanix.endpoint
-    username = var.nutanix.username
-    password = var.nutanix.password
+    username = var.nutanix_username
+    password = var.nutanix_password
   }
 
 data "nutanix_cluster" "example" {
@@ -63,13 +62,13 @@ module "aws_ec2" {
 module "azure_vm" {
   source               = "./modules/azure-vm"
   vm_name              = var.azure_vm_name
-  resource_group_name  = var.azure_resource_group
+  resource_group_name  = var.azure_resource_group_name
   location             = var.azure_location
   vm_size              = var.azure_vm_size
   admin_username       = var.azure_admin_username
   admin_password       = var.azure_admin_password
   image_reference      = var.azure_image_reference
-  network_interface_id = azurerm_network_interface.example_primary.id
+  network_interface_id = var.azure_network_interface_id
+  os_disk_size_gb      = var.azure_os_disk_size_gb
+  storage_account_type = var.azure_storage_account_type
 }
- Terraform interacts with the Proxmox API over the network, so you only need access to a running Proxmox server or cluster.
-

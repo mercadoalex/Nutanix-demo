@@ -36,8 +36,6 @@ variable "proxmox_password" {
   sensitive   = true
 }
 
-
-
 variable "aws_instance_type" {
   description = "The type of AWS EC2 instance"
   type        = string

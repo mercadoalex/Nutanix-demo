@@ -1,6 +1,7 @@
 variable "nutanix_endpoint" {
-  description = "The Nutanix API endpoint"
+  description = "The endpoint URL for the Nutanix cluster"
   type        = string
+  default     = "https://your-nutanix-cluster-endpoint:9440"
 }
 
 variable "nutanix_username" {
