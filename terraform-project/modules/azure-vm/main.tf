@@ -3,8 +3,8 @@ resource "azurerm_resource_group" "example" {
   location = var.location
 }
 
-resource "azurerm_network_interface" "example" {
-  name                = "${var.vm_name}-nic"
+resource "azurerm_network_interface" "example_primary" {
+  name                = "${var.vm_name}-nic-primary"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
@@ -12,6 +12,7 @@ resource "azurerm_network_interface" "example" {
     name                          = "internal"
     subnet_id                    = azurerm_subnet.example.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.example.id
   }
 }
 
@@ -29,6 +30,13 @@ resource "azurerm_subnet" "example" {
   address_prefixes     = ["10.0.1.0/24"]
 }
 
+resource "azurerm_public_ip" "example" {
+  name                = "${var.vm_name}-public-ip"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  allocation_method   = "Dynamic"
+}
+
 resource "azurerm_linux_virtual_machine" "example" {
   name                = var.vm_name
   resource_group_name = azurerm_resource_group.example.name
@@ -37,7 +45,7 @@ resource "azurerm_linux_virtual_machine" "example" {
   admin_username      = var.admin_username
   admin_password      = var.admin_password
   network_interface_ids = [
-    azurerm_network_interface.example.id,
+    azurerm_network_interface.example_primary.id,
   ]
 
   os_disk {
@@ -52,3 +60,6 @@ resource "azurerm_linux_virtual_machine" "example" {
     version   = "latest"
   }
 }
+
+
+

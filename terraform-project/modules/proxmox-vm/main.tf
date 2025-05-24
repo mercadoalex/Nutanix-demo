@@ -31,11 +31,3 @@ resource "proxmox_vm_qemu" "vm" {
     ]
   }
 }
-
-output "vm_id" {
-  value = proxmox_vm_qemu.vm.id
-}
-
-output "vm_ip" {
-  value = proxmox_vm_qemu.vm.network_interface[0].ip
-}

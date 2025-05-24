@@ -1,3 +1,4 @@
+
 resource "nutanix_vm" "example" {
   name              = var.vm_name
   cluster_id        = data.nutanix_cluster.example.id
@@ -14,10 +15,3 @@ resource "nutanix_vm" "example" {
   }
 }
 
-output "vm_id" {
-  value = nutanix_vm.example.id
-}
-
-output "vm_ip" {
-  value = nutanix_vm.example.network_interface[0].ip_address
-}

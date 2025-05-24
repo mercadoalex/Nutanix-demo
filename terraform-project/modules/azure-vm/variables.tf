@@ -39,3 +39,7 @@ variable "image_reference" {
   description = "The image reference for the Azure Virtual machine"
   type        = map(string)
 }
+variable "azure_network_interface_id" {
+  description = "The ID of the Azure network interface to attach to the VM"
+  type        = string
+}

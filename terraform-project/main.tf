@@ -18,15 +18,27 @@ terraform {
     }
   }
 }
+  
+provider "nutanix" {
+    endpoint = var.nutanix.endpoint
+    username = var.nutanix.username
+    password = var.nutanix.password
+  }
 
 data "nutanix_cluster" "example" {
-  endpoint = var.endpoint
-  username = var.username
-  password = var.password
+  name = var.nutanix_cluster_name
+}
+output "cluster_id" {
+  value = data.nutanix_cluster.example.id
+}
+output "cluster_name" {
+  value = data.nutanix_cluster.example.name
 }
 
+
+
 module "proxmox_vm" {
-  source    = "./modules/proxmox-vm"
+  source                = "./modules/proxmox-vm"
   proxmox_vm_name       = var.proxmox_vm_name
   proxmox_cores         = var.proxmox_cores
   proxmox_memory        = var.proxmox_memory
@@ -41,21 +53,23 @@ module "proxmox_vm" {
 }
 
 module "aws_ec2" {
-  source          = "./modules/aws-ec2"
-  instance_type   = var.aws_instance_type
-  ami             = var.aws_ami
-  key_name        = var.aws_key_name
+  source             = "./modules/aws-ec2"
+  instance_type      = var.aws_instance_type
+  ami                = var.aws_ami
+  key_name           = var.aws_key_name
   security_group_ids = var.aws_security_group_ids
 }
 
 module "azure_vm" {
-  source         = "./modules/azure-vm"
-  vm_name        = var.azure_vm_name
-  resource_group_name = var.azure_resource_group
-  location       = var.azure_location
-  vm_size        = var.azure_vm_size
-  admin_username = var.azure_admin_username
-  admin_password = var.azure_admin_password
+  source               = "./modules/azure-vm"
+  vm_name              = var.azure_vm_name
+  resource_group_name  = var.azure_resource_group
+  location             = var.azure_location
+  vm_size              = var.azure_vm_size
+  admin_username       = var.azure_admin_username
+  admin_password       = var.azure_admin_password
   image_reference      = var.azure_image_reference
-  network_interface_id = var.azure_network_interface_id
+  network_interface_id = azurerm_network_interface.example_primary.id
 }
+ Terraform interacts with the Proxmox API over the network, so you only need access to a running Proxmox server or cluster.
+

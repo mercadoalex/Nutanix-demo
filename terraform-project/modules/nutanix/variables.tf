@@ -1,29 +1,20 @@
-variable "cluster_name" {
-  description = "The name of the Nutanix cluster."
-  type        = string
-}
-
-variable "resource_allocation" {
-  description = "Resource allocation settings for VMs on Nutanix."
-  type        = map(string)
-}
-
-variable "network_settings" {
-  description = "Network settings for VMs on Nutanix."
-  type        = map(string)
-}
-
-variable "endpoint" {
+variable "nutanix_endpoint" {
   description = "The Nutanix API endpoint"
   type        = string
 }
-variable "username" {
+
+variable "nutanix_username" {
   description = "The username for the Nutanix API"
   type        = string
 }
 
-variable "password" {
+variable "nutanix_password" {
   description = "The password for the Nutanix API"
   type        = string
   sensitive   = true
+}
+
+variable "nutanix_cluster_name" {
+  description = "The name of the Nutanix cluster to query"
+  type        = string
 }
